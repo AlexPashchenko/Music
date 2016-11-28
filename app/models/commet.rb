@@ -1,2 +1,0 @@
-class Commet < ApplicationRecord
-end
