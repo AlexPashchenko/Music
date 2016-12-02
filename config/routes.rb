@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
+  devise_for :users
  root 'mainpage#index'
- resources :posts do
+
+  resources :categories, only: [:show]
+
+
+  resources :posts do
    resources :comments
  end
 end
