@@ -1,9 +1,7 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user! , except: [:show, :index]
+  before_action :set_post, only:  [:update, :destroy]
 
-  # GET /posts
-  # GET /posts.json
   def index
     @posts = Post.all
   end
@@ -11,23 +9,28 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+   @post=Post.find(params[:id])
+   @comments= @post.comments.order('created_at DESC').paginate(:page=> params[:page], :per_page => 5 )
+   @track=@post.track(params)
+   render :show
   end
 
   # GET /posts/new
   def new
     @post = Post.new
+    @post.build_track
   end
 
   # GET /posts/1/edit
   def edit
+    @post = Post.find(params[:id])
   end
 
   # POST /posts
   # POST /posts.json
   def create
-    @post = Post.new(post_params)
-
-    respond_to do |format|
+    @post = current_user.posts.create(post_params)
+        respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
@@ -41,6 +44,7 @@ class PostsController < ApplicationController
   # PATCH/PUT /posts/1
   # PATCH/PUT /posts/1.json
   def update
+
     respond_to do |format|
       if @post.update(post_params)
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
@@ -69,7 +73,7 @@ class PostsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.fetch(:post, {})
+   def post_params
+      params.require(:post).permit(:title, :description, :category_id, track_attributes:[:music])
     end
 end

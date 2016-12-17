@@ -1,4 +1,22 @@
 <p id="notice"><%= notice %></p>
 
+<strong>Title:</strong>
+<%= @post.title %>
+</p>
+<!--<%= image_tag @post.image %>-->
+<p>
+  <strong>Description:</strong>
+  <%= @post.description %>
+</p>
+<%=audio_tag @post.track.music, controls: true, class: "audio-play"%>
+
+
+
+
+<p>
+
+<p>
+
+
 <%= link_to 'Edit', edit_post_path(@post) %> |
 <%= link_to 'Back', posts_path %>
