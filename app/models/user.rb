@@ -23,6 +23,7 @@
 #
 
 class User < ApplicationRecord
+  extend Enumerize
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable
   devise :database_authenticatable, :registerable,
@@ -32,4 +33,5 @@ class User < ApplicationRecord
   has_many :comments
   has_attached_file :avatar, styles: { medium: "100x100>", thumb: "50x50>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  enumerize :role, in: [:admin, :user]
 end

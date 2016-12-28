@@ -50,6 +50,7 @@ GEM
       sass (>= 3.3.4)
     builder (3.2.2)
     byebug (9.0.6)
+    cancancan (1.15.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.8)
@@ -72,6 +73,8 @@ GEM
       warden (~> 1.2.3)
     email_validator (1.6.0)
       activemodel
+    enumerize (2.0.1)
+      activesupport (>= 3.2)
     erubis (2.7.0)
     execjs (2.7.0)
     ffi (1.9.14)
@@ -202,9 +205,11 @@ DEPENDENCIES
   annotate
   bootstrap-sass (~> 3.3.6)
   byebug
+  cancancan
   coffee-rails (~> 4.2)
   devise
   email_validator
+  enumerize
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)

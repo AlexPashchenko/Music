@@ -260,27 +260,30 @@
       <column id="78" parent="13" name="music_updated_at">
         <data-type>datetime|0</data-type>
       </column>
-      <key id="79" parent="13" name="PRIMARY">
+      <column id="79" parent="13" name="genre_id">
+        <data-type>int(11)|0</data-type>
+      </column>
+      <key id="80" parent="13" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
-      <column id="80" parent="14" name="id">
+      <column id="81" parent="14" name="id">
         <mandatory>1</mandatory>
         <data-type>int(11)|0</data-type>
         <sequence-identity>1</sequence-identity>
       </column>
-      <column id="81" parent="14" name="name">
+      <column id="82" parent="14" name="name">
         <data-type>varchar(255)|0</data-type>
       </column>
-      <column id="82" parent="14" name="created_at">
+      <column id="83" parent="14" name="created_at">
         <mandatory>1</mandatory>
         <data-type>datetime|0</data-type>
       </column>
-      <column id="83" parent="14" name="updated_at">
+      <column id="84" parent="14" name="updated_at">
         <mandatory>1</mandatory>
         <data-type>datetime|0</data-type>
       </column>
-      <key id="84" parent="14" name="PRIMARY">
+      <key id="85" parent="14" name="PRIMARY">
         <columns>id</columns>
         <primary>1</primary>
       </key>
