@@ -11,7 +11,7 @@
   <body>
   <% if user_signed_in? %>
   <ul class="nav navbar-nav">
-        <li><%=image_tag current_user.avatar.url(:thumb) %></li>
+        <!--<li><%=image_tag current_user.avatar.url(:thumb) %></li>-->
     <li> <%= link_to 'Sign out', destroy_user_session_path, :method => :delete%></li>
     <li> <%= link_to 'Edit Profile', edit_user_registration_path%></li>
   </ul>

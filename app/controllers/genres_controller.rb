@@ -5,22 +5,18 @@ class GenresController < ApplicationController
     @genres = Genre.all
   end
 
-  # GET /genres/1
-  # GET /genres/1.json
   def show
+    @tracks=@genre.tracks
   end
 
-  # GET /genres/new
   def new
     @genre = Genre.new
   end
 
-  # GET /genres/1/edit
+
   def edit
   end
 
-  # POST /genres
-  # POST /genres.json
   def create
     @genre = Genre.new(genre_params)
 
@@ -49,8 +45,6 @@ class GenresController < ApplicationController
     end
   end
 
-  # DELETE /genres/1
-  # DELETE /genres/1.json
   def destroy
     @genre.destroy
     respond_to do |format|
@@ -60,13 +54,11 @@ class GenresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_genre
-      @genre = Genre.find(params[:id])
-    end
+  def set_genre
+    @genre = Genre.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def genre_params
-      params.fetch(:genre, {})
-    end
+  def genre_params
+    params.require(:genre).permit(:name)
+  end
 end

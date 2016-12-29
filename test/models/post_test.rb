@@ -8,11 +8,6 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  user_id            :integer
-#  category_id        :integer
-#  music_file_name    :string(255)
-#  music_content_type :string(255)
-#  music_file_size    :integer
-#  music_updated_at   :datetime
 #  image_file_name    :string(255)
 #  image_content_type :string(255)
 #  image_file_size    :integer

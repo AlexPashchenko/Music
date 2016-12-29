@@ -8,11 +8,6 @@
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #  user_id            :integer
-#  category_id        :integer
-#  music_file_name    :string(255)
-#  music_content_type :string(255)
-#  music_file_size    :integer
-#  music_updated_at   :datetime
 #  image_file_name    :string(255)
 #  image_content_type :string(255)
 #  image_file_size    :integer
@@ -20,12 +15,12 @@
 #
 
 class Post < ApplicationRecord
-  has_many :comments
-  has_one :track
-  accepts_nested_attributes_for :track
+  has_many :comments, dependent: :destroy
+  has_one :track, dependent: :destroy
   belongs_to :user
-  belongs_to :category
-  validates :title, presence: true
+  accepts_nested_attributes_for :track
+
   has_attached_file :image
+  validates :title, :track, presence: true
   validates_attachment_content_type :image, :content_type =>  ['image/png','image/jpeg','image/jpeg']
 end

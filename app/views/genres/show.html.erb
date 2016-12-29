@@ -1,4 +1,11 @@
-<p id="notice"><%= notice %></p>
+<% if can? :update, Genre %>
+    <%= button_to 'Edit', edit_genre_path(@genre), method: 'get' %>
+<% end %>
+<%= button_to 'Back to Genres', genres_path, method: 'get' %>
 
-<%= link_to 'Edit', edit_genre_path(@genre) %> |
-<%= link_to 'Back', genres_path %>
+<% @tracks.each do |track| %>
+    <h4><%= track.music.original_filename.chomp('.mp3') %></h4>
+    <%=audio_tag track.music, controls: true, class: "audio-play"%>
+<% end %>
+
+

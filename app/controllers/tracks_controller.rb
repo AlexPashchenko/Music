@@ -5,12 +5,8 @@ class TracksController < ApplicationController
     @tracks = Track.all
   end
 
-  # GET /tracks/1
-  # GET /tracks/1.json
-
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def track_params
-      params.require(:track).permit(:music)
+      params.require(:track).permit(:music, :genre_id)
     end
 end

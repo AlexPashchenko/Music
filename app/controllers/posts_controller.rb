@@ -1,29 +1,24 @@
 class PostsController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user! , except: [:show, :index]
-  before_action :set_post, only:  [:update, :destroy]
+  before_action :set_post, only: [:show, :edit]
 
   def index
     @posts = Post.all
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
-   @post=Post.find(params[:id])
    @comments= @post.comments.order('created_at DESC').paginate(:page=> params[:page], :per_page => 5 )
    @track=@post.track(params)
    render :show
   end
 
-  # GET /posts/new
   def new
     @post = Post.new
     @post.build_track
   end
 
-  # GET /posts/1/edit
   def edit
-    @post = Post.find(params[:id])
   end
 
   # POST /posts
@@ -74,6 +69,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
    def post_params
-      params.require(:post).permit(:title, :description, :category_id, track_attributes:[:music])
+      params.require(:post).permit(:title, :description, :image, track_attributes:[:music])
     end
 end
