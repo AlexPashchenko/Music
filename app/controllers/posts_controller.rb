@@ -4,13 +4,14 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit]
 
   def index
-    @posts = Post.all
+    @q = Post.ransack(params[:q])
+    @posts = @q.result.order('created_at DESC').paginate(:page=> params[:page], :per_page => 5 )
   end
 
   def show
-   @comments= @post.comments.order('created_at DESC').paginate(:page=> params[:page], :per_page => 5 )
-   @track=@post.track(params)
-   render :show
+    @comments= @post.comments.order('created_at DESC').paginate(:page=> params[:page], :per_page => 5 )
+    @track=@post.track(params)
+    render :show
   end
 
   def new
@@ -21,13 +22,11 @@ class PostsController < ApplicationController
   def edit
   end
 
-  # POST /posts
-  # POST /posts.json
   def create
     @post = current_user.posts.create(post_params)
-        respond_to do |format|
+    respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
+        format.html { redirect_to @post}
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -36,13 +35,12 @@ class PostsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
+
   def update
 
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to @post}
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
@@ -51,24 +49,20 @@ class PostsController < ApplicationController
     end
   end
 
-  # DELETE /posts/1
-  # DELETE /posts/1.json
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_url }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-   def post_params
-      params.require(:post).permit(:title, :description, :image, track_attributes:[:music])
-    end
+  def post_params
+    params.require(:post).permit(:title, :description, :image, track_attributes:[:music, :genre_id])
+  end
 end

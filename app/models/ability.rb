@@ -8,7 +8,9 @@ class Ability
       can :manage, :all
     elsif user.role.user?
       can :read,  [Post, Track, Comment,Genre]
-      can [:create,:update,:destroy], [Post, Comment], :user_id => user.id
+      can  :destroy, [Post, Comment], user_id: user.id
+      can :update, [Post, Comment], user_id: user.id
+      can :create, [Post, Comment], user_id: user.id
     else
       can :read, [Post, Comment, Track, Genre]
     end

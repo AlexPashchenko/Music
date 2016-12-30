@@ -13,6 +13,9 @@
     </div>
 
     <div class="field">
+      <%= image_tag @current_user.avatar.url(:thumb)%>
+    </div>
+    <div class="field">
       <%= f.file_field :avatar%>
     </div>
 

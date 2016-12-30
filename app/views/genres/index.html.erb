@@ -1,19 +1,20 @@
 <h1>Genres</h1>
-
-<%= button_to 'New Genre', new_genre_path, method: 'get' %>
-
+<% if can? :create, Genre %>
+    <%= button_to 'New Genre', new_genre_path, method: 'get' %>
+<% end %>
 <div>
   <% @genres.each do |genre| %>
-      <%= genre.name %>
+      <div>
+        <h5><%= genre.name %></h5>
 
-      <% if can? :read, Genre %>
-          <%= link_to 'Show', genre %>
-      <% end %>
+        <% if can? :read, Genre %>
+            <%= link_to 'Show', genre %>
+        <% end %>
 
-      <% if can? [:destroy], Genre %>
-          <%= link_to 'Destroy', genre, method: :delete, data: { confirm: 'Are you sure?' } %>
-      <% end %>
-
+        <% if can? [:destroy], Genre %>
+            <%= link_to 'Destroy', genre, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+      </div>
   <% end %>
 </div>
 <br>

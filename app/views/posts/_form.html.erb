@@ -18,10 +18,12 @@
       <%= f.text_area :description %>
       <%= f.label :image %>
       <%= f.file_field :image %>
-
       <%= f.fields_for :track do |u| %>
           <%= u.label :music %>
           <%= u.file_field :music %>
+          <%= u.label :category_id%>
+          <%= u.collection_select :genre_id, Genre.order(:name),:id,:name, include_blank: true %>
+          </div>
       <%end %>
       </div>
     <div>

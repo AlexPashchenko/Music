@@ -20,7 +20,7 @@ class Post < ApplicationRecord
   belongs_to :user
   accepts_nested_attributes_for :track
 
-  has_attached_file :image
+  has_attached_file :image, styles: { medium: "300x300>", thumb: "150x150>" }
   validates :title, :track, presence: true
   validates_attachment_content_type :image, :content_type =>  ['image/png','image/jpeg','image/jpeg']
 end

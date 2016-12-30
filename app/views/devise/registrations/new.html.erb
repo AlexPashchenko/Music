@@ -1,36 +1,48 @@
-<h2>Sign up</h2>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+  <title>Регистрация</title>
+</head>
+<body>
+<div class="wrapper">
+  <div class="content">
+    <div id="form_wrapper" class="form_wrapper">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {:class => "register active"}) do |f| %>
+          <%= devise_error_messages! %>
+          <h3>Регистрация</h3>
+          <div class="column">
+            <div>
+              <%= f.label :username %>
+              <%= f.text_field :username, autofocus: true %>
+            </div>
+            <div >
+              <%= f.label :email %>
+              <%= f.email_field :email, autofocus: true %>
+            </div>
+          </div>
+          <div class="column">
+            <div>
+              <%= f.label :password %>
+              <%= f.password_field :password, autocomplete: "off" %>
+            </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-    <div class="field">
-      <%= f.label :username %><br />
-      <%= f.text_field :username, autofocus: true %>
+            <div>
+              <%= f.label :password_confirmation %>
+              <%= f.password_field :password_confirmation, autocomplete: "off" %>
+            </div>
+
+          </div>
+          <div class="bottom">
+              <%= f.submit "Sign up" %>
+              <%= render "devise/shared/links" %>
+          </div>
+      <% end %>
     </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
   </div>
+</div>
+</body>
+</html>
 
-    <div class="field">
-      <%= f.file_field :avatar%>
-    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>

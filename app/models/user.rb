@@ -32,7 +32,8 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :comments
-  has_attached_file :avatar, styles: { medium: "100x100>", thumb: "50x50>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/system/avatar_missing.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
   enumerize :role, in: [:admin, :user], default: :user
+  validates :email, uniqueness: true
 end
